@@ -1,6 +1,6 @@
 package bencode
 
-import(
+import (
 	"bytes"
 	"testing"
 
@@ -8,43 +8,43 @@ import(
 )
 
 func TestString(t *testing.T) {
-	val:="abc"
-	buf:=new(bytes.Buffer)
-	wLen:=EncodeString(buf,val)
-	assert.Equal(t,5,wLen)
-	str,_:=DecodeString(buf)
-	assert.Equal(t,val,str)
+	val := "abc"
+	buf := new(bytes.Buffer)
+	wLen := EncodeString(buf, val)
+	assert.Equal(t, 5, wLen)
+	str, _ := DecodeString(buf)
+	assert.Equal(t, val, str)
 
-	val=""
+	val = ""
 	for i := 0; i < 20; i++ {
-		val+=string(byte('a'+i))
+		val += string(byte('a' + i))
 	}
 	buf.Reset()
-	wLen=EncodeString(buf,val)
-	assert.Equal(t,23,wLen)
-	str,_=DecodeString(buf)
-	assert.Equal(t,val,str)
+	wLen = EncodeString(buf, val)
+	assert.Equal(t, 23, wLen)
+	str, _ = DecodeString(buf)
+	assert.Equal(t, val, str)
 }
 
 func TestInt(t *testing.T) {
-	val:=999
-	buf:=new(bytes.Buffer)
-	wLen:=EncodeInt(buf,val)
-	assert.Equal(t,5,wLen)
-	iv,_:=DecodeInt(buf)
-	assert.Equal(t,val,iv)
+	val := 999
+	buf := new(bytes.Buffer)
+	wLen := EncodeInt(buf, val)
+	assert.Equal(t, 5, wLen)
+	iv, _ := DecodeInt(buf)
+	assert.Equal(t, val, iv)
 
-	val=0
+	val = 0
 	buf.Reset()
-	wLen=EncodeInt(buf,val)
-	assert.Equal(t,3,wLen)
-	iv,_=DecodeInt(buf)
-	assert.Equal(t,val,iv)
+	wLen = EncodeInt(buf, val)
+	assert.Equal(t, 3, wLen)
+	iv, _ = DecodeInt(buf)
+	assert.Equal(t, val, iv)
 
-	val=-999
+	val = -999
 	buf.Reset()
-	wLen=EncodeInt(buf,val)
-	assert.Equal(t,6,wLen)
-	iv,_=DecodeInt(buf)
-	assert.Equal(t,val,iv)
+	wLen = EncodeInt(buf, val)
+	assert.Equal(t, 6, wLen)
+	iv, _ = DecodeInt(buf)
+	assert.Equal(t, val, iv)
 }
